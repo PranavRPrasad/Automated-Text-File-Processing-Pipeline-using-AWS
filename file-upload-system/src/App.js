@@ -7,9 +7,11 @@ const S3Uploader = () => {
     const [uploadProgress, setUploadProgress] = useState(0);
     const [textInput, setTextInput] = useState('');
     const [apiResponse, setApiResponse] = useState(null);
+    const [fileSubmitted, setFileSubmitted] = useState(false);
 
     const handleFileChange = (e) => {
         setSelectedFile(e.target.files[0]);
+        setFileSubmitted(false);
     };
 
     const handleTextChange = (e) => {
@@ -17,7 +19,10 @@ const S3Uploader = () => {
     };
 
     const uploadFile = async () => {
-        if (!selectedFile) return;
+        if (!selectedFile) {
+            setFileSubmitted(true);
+            return;
+        }
 
         setUploading(true);
 
@@ -41,7 +46,6 @@ const S3Uploader = () => {
             console.log('File uploaded successfully:', response);
 
             const apiUrl = process.env.REACT_APP_API_GATEWAY;
-            // const apiUrl = 'https://8sewjemv47.execute-api.us-west-1.amazonaws.com/test/file'
             const apiParams = {
                 method: 'POST',
                 headers: {
@@ -56,7 +60,7 @@ const S3Uploader = () => {
             const responseFromApi = await fetch(apiUrl, apiParams);
             const responseData = await responseFromApi.json();
             setApiResponse(responseData);
-
+            setFileSubmitted(true);
         } catch (error) {
             console.error('Upload failed:', error);
         } finally {
@@ -82,12 +86,15 @@ const S3Uploader = () => {
             {uploadProgress > 0 && <div style={{ marginTop: '20px' }}>Progress: {uploadProgress}%</div>}
             {apiResponse && (
                 <div style={{ marginTop: '20px' }}>
-                    <p style={{ color: 'white' }}>File submitted successfully</p>
+                    <p style={{ color: 'white' }}>File submitted successfully.</p>
+                </div>
+            )}
+            {fileSubmitted && !selectedFile && (
+                <div style={{ marginTop: '20px' }}>
+                    <p style={{ color: 'white' }}>Please upload the file.</p>
                 </div>
             )}
         </div>
-
-
     );
 };
 
