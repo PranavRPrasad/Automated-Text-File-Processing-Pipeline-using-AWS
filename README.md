@@ -1,3 +1,7 @@
+# Gist
++ Implemented an AWS-based automated text file processing pipeline using React, S3, DynamoDB, Lambda, API Gateway, and EC2.
++ Users could submit a text file via React, triggering two Lambda functions, one through an API Gateway to store metadata in DynamoDB and another through a DynamoDB event to launch an EC2 instance to download the uploaded text file from S3, process it, create the output text file, and save it back to S3 before auto-termination of the instance, offering a scalable and cost-effective solution.
+
 # Prerequisites
 + Ensure you have the latest LTS (version 20.12.2 LTS) of [Node.js](https://nodejs.org/en/download/current) installed on your local system.
 + An [AWS account](https://aws.amazon.com/free/?gclid=EAIaIQobChMIic2Z0LC9hQMVejfUAR2KrgyrEAAYASAAEgJgBvD_BwE&trk=6a4c3e9d-cdc9-4e25-8dd9-2bd8d15afbca&sc_channel=ps&ef_id=EAIaIQobChMIic2Z0LC9hQMVejfUAR2KrgyrEAAYASAAEgJgBvD_BwE:G:s&s_kwcid=AL!4422!3!651751059783!e!!g!!aws!19852662197!145019195897&all-free-tier.sort-by=item.additionalFields.SortRank&all-free-tier.sort-order=asc&awsf.Free%20Tier%20Types=*all&awsf.Free%20Tier%20Categories=*all).
