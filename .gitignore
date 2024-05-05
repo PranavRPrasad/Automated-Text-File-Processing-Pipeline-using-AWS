@@ -1,8 +1,9 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
-/package-lock.json
+/create_ec2_instance_lambda_code/node_modules
+/process_request_lambda_code/package-lock.json
+/create_ec2_instance_lambda_code/package-lock.json
 /.pnp
 .pnp.js
 
